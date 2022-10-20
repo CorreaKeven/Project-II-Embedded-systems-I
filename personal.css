@@ -1,0 +1,17 @@
+.css_botao{
+  display: inline-block;
+  margin: 0 auto;
+	margin-left: 5px;
+	margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 15%;
+  border-radius: 7px; /*efeito de arredondamento nos botoes*/
+  
+}
+
+.chart-wrapper{ /* dimensao dos graficos*/
+    margin: 0 auto;
+    height: 25%; /* era 600px*/
+    width: 50%;   /* era 900px*/
+}

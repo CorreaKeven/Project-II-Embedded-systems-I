@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <link href="personal.css" rel="stylesheet">
+  <script src="chart.min.js"></script>
+  <script src="grafico.js"></script>
+  <title>Sistemas Embarcados - Projeto 2</title>
+</head>
+
+<body style="background-color: rgb(0, 0, 0);">
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1">
+        <img src="./../Brasão_PUCRS.png" alt="" style="width: 100%;">
+      </div>
+      <div class="col-md-11">
+        <center>
+          <h1><i>
+              <font color="white">Sistema de Aquisição de Dados</font>
+            </i></h1>                                                               
+          <h4>
+            <font color="white">Sistemas Embarcados I - PUCRS</font>
+          </h4>
+          <h5>
+            <font color="white">Keven Corrêa e Diego Matzenbacher</font>
+          </h5>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <hr style="color: #b5b5b5; height: 2px;">
+      <div align="center">
+        <button id="LerTemp" onclick="LerTemp()" class="btn btn-outline-info css_botao">Aquisição de
+          Temperatura</button>
+        <button id="LerUmid" onclick="LerUmid()" class="btn btn btn-outline-info css_botao">Aquisição de
+          Umidade</button>
+        <button id="SalvaTemp" onclick="SalvaTemp()" class="btn btn btn-outline-info css_botao">Salvar Dados de
+          Temperatura</button>
+        <button id="SalvaUmid" onclick="SalvaUmid()" class="btn btn btn-outline-info css_botao">Salvar Dados de
+          Umidade</button>
+      </div>
+    </div>
+
+    <hr style="color: #b5b5b5; height: 2px;">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <canvas id="plot1" width="600px" height="100px"></canvas>
+
+        <script>
+          window.onload = () => {
+            const graficoplot1 = new Chart(document.getElementById('plot1'), dados_Temperatura_Umidade);
+            const graficoplot2 = new Chart(document.getElementById('plot2'), dados_Temperatura);
+            const graficoplot3 = new Chart(document.getElementById('plot3'), dados_Umidade);
+
+              window.grafico1 = function (x1,y,z) {
+               
+                if(ler_temperatura === true || ler_umidade === true){
+                
+                if(ler_temperatura === true){
+                graficoplot1.data.labels.push(x1)
+                graficoplot1.data.datasets[0].data.push(y)
+                graficoplot1.update()
+                }
+
+                if(ler_umidade === true) {
+                graficoplot1.data.labels.push(x1)
+                graficoplot1.data.datasets[1].data.push(z)
+                graficoplot1.update()
+                }
+              }
+
+              window.grafico2 = function (x2, y) {
+                if(ler_temperatura === true){
+                graficoplot2.data.labels.push(x2)
+                graficoplot2.data.datasets[0].data.push(y)
+                graficoplot2.update()
+              }
+            }
+
+              window.grafico3 = function (x3, y) {
+              if(ler_umidade === true){
+              graficoplot3.data.labels.push(x3)
+              graficoplot3.data.datasets[0].data.push(y)
+              graficoplot3.update()
+
+                  } 
+              }
+              
+              
+             
+            }
+          }
+        </script>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      <canvas id="plot2" width="600px" height="200px"></canvas>
+    </div>
+    <div class="col-md-5">
+      <canvas id="plot3" width="600px" height="200px"></canvas>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <hr style="color: #b5b5b5; height: 2px;">
+
+  <div align="center">
+    <button id="BtAjuda" onclick="Ajuda()" class="btn btn-outline-info css_botao">Ajuda (?)</button>
+    <button id="BtSair" onclick="Sair()" class="btn btn-outline-danger css_botao">Sair (x)</button>
+  </div>
+  <hr style="color: #b5b5b5; height: 2px;">
+  <h6>
+    <center>
+      <font color="white">Keven Corrêa e Diego Matzenbacher @Out/2022</font>
+    </center>
+  </h6>
+  <hr style="color: #b5b5b5; height: 2px;">
+
+
+  </div>
+
+  <script>
+
+    function Ajuda() {
+      alert("Os botões de Aquisição de temperatura e umidade mostram os dados nos seus respectivos gráficos. Os botões de salvar, salvam os dados em arquivos .csv");
+    }
+    function Sair() {
+      window.close();
+    }
+    function LerTemp() {
+      ler_temperatura = true;
+       }
+    function LerUmid() {
+      ler_umidade = true;
+  }
+
+    function SalvaTemp() {
+      flag_salvaTemp = true;
+    }
+    function SalvaUmid() {
+      flag_salvaUmid = true;
+
+    }
+  </script>
+
+  <script src="./serial.js"></script>
+
+</body>
+
+</html>
